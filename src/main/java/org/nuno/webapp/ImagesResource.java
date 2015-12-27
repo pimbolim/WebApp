@@ -32,7 +32,7 @@ public class ImagesResource {
 		ResponseMessage resp = new ResponseMessage();
 		String uploadedFileLocation = "/home/nuno/Documentos/";
 		if (uploadedInputStream.equals(null))
-			System.out.println("NULL OBJECT FOUND");
+			System.out.println("NULL OBJECT FOUNDD");
 		resp = imgserv.uploadImage(uploadedInputStream, uploadedFileLocation,
 				fileDetail.getFileName());
 
