@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Comments {
@@ -23,7 +25,9 @@ public class Comments {
 	@Column(name ="DATE_CREATION")
 	private Date dateCreation;
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "ID_IMAGE")//Images
+	private Images imagem;
 	
 	public long getIdComment() {
 		return idComment;

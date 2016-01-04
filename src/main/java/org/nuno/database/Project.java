@@ -13,13 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Project {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_Project")
+	@Column(name = "ID_PROJECT")
 	private long idProject;
 
 	@Column(name = "PROJECT_NAME")
@@ -32,16 +33,30 @@ public class Project {
 	private String dateCreation;
 
 	@Column(name = "PROJECT_USERS")
-	
-	@ManyToMany(cascade= CascadeType.PERSIST,fetch=FetchType.EAGER)
-	
-	private Collection<UserDetails> Users = new ArrayList<UserDetails>();
+
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Collection<UserDetails> Users = new ArrayList<UserDetails>();//USERS TABLE
+
+	@OneToMany(mappedBy = "project")
+	private Collection<Images> imagens = new ArrayList<Images>();//IMAGES TABLE
 
 	public Project() {
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 		dateCreation = dateFormat.format(new Date());
+	}
+
+	public Collection<Images> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(Collection<Images> imagens) {
+		this.imagens = imagens;
+	}
+
+	public void setDateCreation(String dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	public long getIdProject() {
@@ -79,6 +94,5 @@ public class Project {
 	public void setUsers(Collection<UserDetails> users) {
 		Users = users;
 	}
-
 
 }

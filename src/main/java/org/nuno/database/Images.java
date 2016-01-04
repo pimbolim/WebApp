@@ -1,5 +1,7 @@
 package org.nuno.database;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -32,11 +35,26 @@ public class Images {
 	private Boolean available;
 	
 	@ManyToOne
-	@JoinColumn(name="USER_EMAIL")
+	@JoinColumn(name="USER_EMAIL")//USERDETAILS
 	private UserDetails user;
 	
+	@ManyToOne
+	@JoinColumn(name="ID_PROJECT")//Project
+	private Project project;
 	
+	@Column(name = "COMMENTS")
+	@OneToMany(mappedBy = "imagem")
+	private Collection<Comments> comments = new ArrayList<Comments>();
+
 	
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
 	public long getIdImage() {
 		return idImage;
 	}
